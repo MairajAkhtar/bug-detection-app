@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        python 'Python 3.11'  // Use the name from Global Tool Configuration
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
@@ -28,7 +32,7 @@ import gdown
 
 model_dir = 'model'
 model_path = os.path.join(model_dir, 'model.joblib')
-model_url = 'https://drive.google.com/uc?export=download&id=1Ezi8WW3XarglXXz7PDqZalw4ps8IioAX'  # Corrected the URL for direct download
+model_url = 'https://drive.google.com/uc?export=download&id=1Ezi8WW3XarglXXz7PDqZalw4ps8IioAX'
 
 if not os.path.exists(model_dir):
     os.makedirs(model_dir)
