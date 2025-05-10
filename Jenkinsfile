@@ -10,7 +10,7 @@ pipeline {
 
         stage('Set Up Python') {
             steps {
-                sh '''
+                bat '''
                     python3 -m venv venv
                     source venv/bin/activate
                     pip install -r requirements.txt
@@ -20,7 +20,7 @@ pipeline {
 
         stage('Download Model') {
             steps {
-                sh '''
+                bat '''
                     source venv/bin/activate
                     python3 -c "
 import os
@@ -42,7 +42,7 @@ if not os.path.exists(model_path):
 
         stage('Run Jenkins Prediction') {
             steps {
-                sh '''
+                bat '''
                     source venv/bin/activate
                     mkdir -p uploads
                     python3 -c "from app import model; import pandas as pd; df = pd.read_csv('uploads/metrics_from_jenkins.csv'); df['Predicted Bugs'] = model.predict(df); df.to_csv('uploads/predicted_from_jenkins.csv', index=False)"
