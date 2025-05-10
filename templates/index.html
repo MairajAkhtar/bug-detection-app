@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bug Detector AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/190/190411.png" />
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans scroll-smooth">
+  <header class="glass sticky top-0 z-40 backdrop-blur-lg shadow-lg bg-black-300 font-poppins">
+    <div class="max-w-7xl mx-auto p-4 flex justify-between items-center">
+      <h1 class="text-3xl font-bold text-white-600 font-poppins">BUG Detector AI</h1>
+      <nav class="space-x-6">
+        <a href="#about" class="link-nav">About</a>
+        <a href="#features" class="link-nav">Features</a>
+        <a href="#upload" class="link-nav">Upload</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ... (your hero and features sections) ... -->
+  <section class="h-screen flex items-center justify-center text-center p-6 bg-gradient-to-tr from-blue-500 to-indigo-600 text-white">
+    <div class="space-y-6 max-w-xl mx-auto">
+      <h2 class="text-5xl font-bold animate-fadeIn">AI-Based Bug Detection System</h2>
+      <p class="text-xl animate-fadeIn">CI/CD integrated proactive bug prevention tool</p>
+      <p class="text-lg mt-4 opacity-90">
+        Bug Detector AI leverages advanced machine learning to identify potential bugs early in your development pipeline. Seamlessly integrating with your CI/CD workflows, it helps you maintain code quality and reduce costly errors before deployment.
+      </p>
+      <a href="#upload" class="btn-glass btn-hover mt-8 inline-block">🚀 Start Now</a>
+    </div>
+  </section>
+
+  <section id="features" class="py-20 bg-gray-100">
+    <div class="max-w-6xl mx-auto p-6">
+      <h3 class="text-4xl font-bold text-center mb-12">🔑 Key Features</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="card-glass">
+          <h4 class="text-xl font-bold mb-2 text-blue-500">AI Powered</h4>
+          <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-md hover:scale-105 transition">
+            <p>Detects bugs using Machine Learning models trained on software metrics.</p>
+          </div>
+        </div>
+        <div class="card-glass">
+          <h4 class="text-xl font-bold mb-2 text-indigo-500">CI/CD Ready</h4>
+          <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-md hover:scale-105 transition">
+            <p>Integrates easily with GitLab, Jenkins, and CI pipelines for real-time checks.</p>
+          </div>
+        </div>
+        <div class="card-glass">
+          <h4 class="text-xl font-bold mb-2 text-green-500">Visual Reports</h4>
+          <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-md hover:scale-105 transition">
+            <p>Modern UI reports with severity rankings, graphs and risk levels.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="upload" class="py-20 bg-white">
+    <div class="max-w-2xl mx-auto glass p-8 text-center">
+      <h3 class="text-3xl font-bold mb-8">📂 Upload Your CSV</h3>
+      <form id="uploadForm" action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv" class="input-glass mb-6" required />
+        <button type="submit" class="btn-glass btn-hover">Analyze 🚀</button>
+      </form>
+      <a href="/generate-sample-csv" class="text-blue-600 underline hover:text-blue-800 mt-4 inline-block">
+        📄 Download Sample CSV
+      </a>
+    </div>
+  </section>
+
+  <section id="upload-source" class="py-20 bg-white">
+    <div class="max-w-2xl mx-auto glass p-8 text-center">
+      <h3 class="text-3xl font-bold mb-8">📂 Upload Your Source Code</h3>
+      <form id="uploadSourceForm" action="/analyze" method="post" enctype="multipart/form-data">
+        <input type="file" name="files" multiple class="input-glass mb-6" required accept=".py,.java,.cpp,.c,.js"/>
+        <button type="submit" class="btn-glass btn-hover">Analyze Code 🚀</button>
+      </form>
+    </div>
+  </section>
+
+
+  <footer class="text-center py-8 text-sm text-gray-500">
+    &copy; 2025 Mairaj Akhtar. All rights reserved.
+  </footer>
+
+  <!-- ... (rest of your sections) ... -->
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      Swal.fire({ title: 'Analyzing...', html: 'Please wait while we predict 🔎', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+      setTimeout(() => { this.submit(); }, 1500);
+    });
+    document.getElementById('uploadSourceForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      Swal.fire({ title: 'Analyzing...', html: 'Extracting metrics and predicting...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+      setTimeout(() => { this.submit(); }, 1500);
+    });
+  </script>
+</body>
+</html>

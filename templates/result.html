@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Prediction Result</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="container mx-auto p-6">
+    <div class="bg-white p-6 rounded-2xl shadow-xl text-center">
+      <h2 class="text-3xl font-bold text-green-600 mb-4">✅ Prediction Completed!</h2>
+      <p class="text-gray-600 mb-6">Your uploaded file has been processed and the predictions are ready.</p>
+      <a href="{{ csv_download_link }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl shadow inline-block mb-4">
+        ⬇️ Download CSV Result
+      </a>
+    </div>
+    <div class="overflow-x-auto rounded-lg shadow mt-6">
+      {{ table|safe }}
+    </div>
+    <div class="text-center mt-6">
+      <a href="/" class="inline-flex items-center text-blue-600 hover:underline">
+        🔙 Back to Home
+      </a>
+    </div>
+  </div>
+</body>
+</html>

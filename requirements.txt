@@ -1,0 +1,7 @@
+flask
+pandas
+scikit-learn
+joblib
+lizard
+gdown
+
