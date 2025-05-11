@@ -15,7 +15,9 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                bat "docker build -t %IMAGE_NAME% ."
+                dir('') {  // '' means root of workspace, change if Dockerfile is in a subfolder
+                    bat "docker build -t %IMAGE_NAME% ."
+                }
             }
         }
         stage('Stop Previous Container') {
