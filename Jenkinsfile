@@ -15,23 +15,17 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                script {
-                    docker.build("${IMAGE_NAME}")
-                }
+                bat "docker build -t %IMAGE_NAME% ."
             }
         }
         stage('Stop Previous Container') {
             steps {
-                script {
-                    sh "docker rm -f ${CONTAINER_NAME} || true"
-                }
+                bat "docker rm -f %CONTAINER_NAME% || exit 0"
             }
         }
         stage('Run Docker Container') {
             steps {
-                script {
-                    sh "docker run -d --name ${CONTAINER_NAME} -p ${PORT}:5000 ${IMAGE_NAME}"
-                }
+                bat "docker run -d --name %CONTAINER_NAME% -p %PORT%:5000 %IMAGE_NAME%"
             }
         }
     }
