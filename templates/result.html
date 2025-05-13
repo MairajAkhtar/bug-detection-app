@@ -14,15 +14,44 @@
       <a href="{{ csv_download_link }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl shadow inline-block mb-4">
         ⬇️ Download CSV Result
       </a>
+      <div class="overflow-x-auto rounded-lg shadow mt-6 max-w-6xl mx-auto">
+        {{ table|safe }}
+      </div>
+      
     </div>
-    <div class="overflow-x-auto rounded-lg shadow mt-6">
-      {{ table|safe }}
+
+    <!-- Feature Explanation Section -->
+    <div class="bg-white p-6 rounded-xl shadow my-6 max-w-4xl mx-auto">
+      <h3 class="text-xl font-semibold mb-4 text-center">Feature Abbreviations Explained</h3>
+      <ul class="list-disc list-inside text-left text-gray-700 columns-1 md:columns-2 gap-6">
+        <li><strong>Num_Loops:</strong> Number of Loops - Total count of loops (for, while) in the code.</li>
+        <li><strong>Num_Variables:</strong> Number of Variables - Total variables declared in the code.</li>
+        <li><strong>Num_Comments:</strong> Number of Comments - Total comment lines in the code.</li>
+        <li><strong>Code_Complexity:</strong> Cyclomatic Complexity - Measure of code's control flow complexity.</li>
+        <li><strong>Lines_Code:</strong> Lines of Code - Total lines present in the source file.</li>
+        <li><strong>Ratio_Comment_Code:</strong> Ratio of Comments to Code - Proportion of comments relative to code lines.</li>
+        <li><strong>Max_Nesting:</strong> Maximum Nesting Depth - Deepest level of nested blocks or loops.</li>
+        <li><strong>Num_Functions:</strong> Number of Functions - Count of function/method definitions.</li>
+        <li><strong>Avg_Function_Length:</strong> Average Function Length - Mean number of lines per function.</li>
+        <li><strong>Num_Classes:</strong> Number of Classes - Count of class definitions.</li>
+        <li><strong>Max_Function_Params:</strong> Max Function Parameters - Highest number of parameters in any function.</li>
+        <li><strong>Fan_In:</strong> Fan-In - Number of functions calling a given function.</li>
+        <li><strong>Fan_Out:</strong> Fan-Out - Number of functions called by a given function.</li>
+        <li><strong>Num_Statements:</strong> Number of Statements - Total executable statements in the code.</li>
+        <li><strong>Num_Imports:</strong> Number of Imports - Count of imported modules or libraries.</li>
+        <li><strong>Halstead_Volume:</strong> Halstead Volume - Complexity metric based on operators and operands.</li>
+      </ul>
     </div>
-    <div class="text-center mt-6">
-      <a href="/" class="inline-flex items-center text-blue-600 hover:underline">
-        🔙 Back to Home
-      </a>
-    </div>
+
   </div>
+  <div class="text-center mt-6">
+    <a href="/" class="inline-flex items-center text-blue-600 hover:underline">
+      🔙 Back to Home
+    </a>
+  </div>
+  <footer class="text-center py-8 text-sm text-gray-600">
+    &copy; 2025 Mairaj Akhtar. All rights reserved.
+  </footer>
 </body>
 </html>
+
