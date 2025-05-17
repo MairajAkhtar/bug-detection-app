@@ -22,9 +22,9 @@ A machine learning-powered web application for analyzing and predicting potentia
 
 ### Installation
 
-1. **Clone the repository**
+1. **Clone this repository**
    ```cmd
-   git clone <repository-url>
+   git clone --single-branch --branch byahmed https://github.com/MairajAkhtar/bug-detection-app.git bda
    cd bda
    ```
 
