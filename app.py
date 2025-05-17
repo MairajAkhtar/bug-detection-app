@@ -91,3 +91,16 @@ def generate_sample_csv():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    # You can add security checks here (e.g., verify GitHub secret)
+    event = request.headers.get('X-GitHub-Event', 'ping')
+    payload = request.json
+
+    # Trigger your automation pipeline here (e.g., call Jenkins)
+    # For now, just log or print the event
+    print(f"Received event: {event}")
+    print(payload)
+    return '', 200
+
