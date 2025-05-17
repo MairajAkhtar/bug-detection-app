@@ -90,7 +90,8 @@ def generate_sample_csv():
     return send_file("sample_input.csv", as_attachment=True)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
+
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
@@ -103,4 +104,3 @@ def webhook():
     print(f"Received event: {event}")
     print(payload)
     return '', 200
-
