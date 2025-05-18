@@ -2,11 +2,30 @@ from flask import Flask, render_template, request, send_file
 import pandas as pd
 import joblib
 import os
+import gdown
 from metric_extractor import extract_metrics
 
 
+def download_model():
+    model_dir = 'model'
+    model_path = os.path.join(model_dir, 'model.joblib')
+    model_url = 'https://drive.google.com/uc?export=download&id=1Ezi8WW3XarglXXz7PDqZalw4ps8IioAX'
+
+    if not os.path.exists(model_dir):
+        os.makedirs(model_dir)
+
+    if not os.path.exists(model_path):
+        print("Downloading model.joblib from Google Drive...")
+        gdown.download(model_url, model_path, quiet=False)
+        print("Download complete.")
+    else:
+        print("Model already exists. Skipping download.")
+    return model_path
+
+
 app = Flask(__name__)
-model = joblib.load('model/model.joblib')
+model_path = download_model()
+model = joblib.load(model_path)
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
