@@ -112,14 +112,15 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
 
 
-@app.route("/webhook", methods=["POST"])
-def webhook():
-    # You can add security checks here (e.g., verify GitHub secret)
-    event = request.headers.get('X-GitHub-Event', 'ping')
-    payload = request.json
+from flask import Flask, request
 
-    # Trigger your automation pipeline here (e.g., call Jenkins)
-    # For now, just log or print the event
-    print(f"Received event: {event}")
-    print(payload)
-    return '', 200
+app = Flask(__name__)
+
+@app.route('/github-webhook/', methods=['POST'])
+def github_webhook():
+    if request.method == 'POST':
+        print("GitHub webhook received!")
+        print(request.json)  # Print the payload
+        return "OK", 200
+    else:
+        return "Method Not Allowed", 405
