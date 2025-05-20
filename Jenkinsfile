@@ -2,9 +2,10 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'bug-detection-tool'
+        IMAGE_NAME = 'mairajakhtar/bug-detection-app'
         CONTAINER_NAME = 'bug-detection-app'
         PORT = '5000'
+        DOCKERHUB_CREDENTIALS = 'dockerhub' // Jenkins credentials ID
     }
 
     stages {
@@ -15,9 +16,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                dir('') {  // '' means root of workspace, change if Dockerfile is in a subfolder
-                    bat "docker build -t %IMAGE_NAME% ."
-                }
+                bat "docker build -t %IMAGE_NAME%:latest ."
             }
         }
         stage('Stop Previous Container') {
@@ -27,7 +26,17 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
-                bat "docker run -d --name %CONTAINER_NAME% -p %PORT%:5000 %IMAGE_NAME%"
+                bat "docker run -d --name %CONTAINER_NAME% -p %PORT%:5000 %IMAGE_NAME%:latest"
+            }
+        }
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    bat '''
+                        echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
+                        docker push %IMAGE_NAME%:latest
+                    '''
+                }
             }
         }
     }
